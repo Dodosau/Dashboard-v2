@@ -1,4 +1,4 @@
-const CACHE_NAME = "dashboard-cache-v1";
+const CACHE_NAME = "dashboard-cache-v2"; // <- IMPORTANT: bump version
 const ASSETS = [
   "./",
   "./index.html",
@@ -13,6 +13,7 @@ const ASSETS = [
   "./manifest.webmanifest",
   "./assets/icons/icon-192.png",
   "./assets/icons/icon-512.png",
+
   // Widgets (HTML/CSS/JS)
   "./widgets/clock/clock.html","./widgets/clock/clock.css","./widgets/clock/clock.js",
   "./widgets/weather/weather.html","./widgets/weather/weather.css","./widgets/weather/weather.js",
@@ -38,6 +39,21 @@ self.addEventListener("activate", (event) => {
 
 self.addEventListener("fetch", (event) => {
   const req = event.request;
+  const url = new URL(req.url);
+
+  // ✅ 1) Ne pas intercepter les appels API externes (STM/Calendar/Météo etc.)
+  // (tout ce qui n'est pas sur le même domaine que le dashboard)
+  if (url.origin !== self.location.origin) {
+    return; // laisse le navigateur faire un fetch normal (pas de cache SW)
+  }
+
+  // ✅ 2) Ne pas cacher les endpoints dynamiques (si un jour tu ajoutes /api/* sur le même domaine)
+  if (url.pathname.startsWith("/api/")) {
+    event.respondWith(fetch(req));
+    return;
+  }
+
+  // ✅ 3) Pour les assets du dashboard: cache-first
   event.respondWith(
     caches.match(req).then((cached) => {
       if (cached) return cached;
@@ -45,7 +61,7 @@ self.addEventListener("fetch", (event) => {
         const copy = resp.clone();
         caches.open(CACHE_NAME).then((cache) => cache.put(req, copy));
         return resp;
-      }).catch(() => caches.match("./index.html"));
+      });
     })
   );
 });

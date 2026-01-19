@@ -1,0 +1,35 @@
+/* css/layout.css */
+
+.container{
+  padding:24px;
+  display:grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap:20px;
+
+  /* 2 colonnes full height */
+  align-items: stretch;
+}
+
+/* Colonne gauche : pile verticale qui prend toute la hauteur */
+.leftCol{
+  display:flex;
+  flex-direction:column;
+  gap:20px;
+  height: 100%;
+}
+
+/* Chaque carte à gauche peut "respirer" sans forcer */
+.leftCol .card{
+  flex: 0 0 auto;
+}
+
+/* Colonne droite : calendrier full height */
+.rightCol{
+  height:100%;
+  display:flex;
+}
+.rightCol .card{
+  width:100%;
+  height:100%;
+  display:flex; /* pour structurer le contenu interne du calendrier */
+}

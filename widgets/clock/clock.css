@@ -1,0 +1,15 @@
+/* css/widget/clock.css */
+
+.clockCard{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  min-height: 180px; /* ajuste selon ton layout */
+}
+
+.clockBig{
+  font-size: 82px;
+  font-weight: 900;
+  letter-spacing: -2px;
+  line-height: 1;
+}

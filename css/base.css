@@ -1,0 +1,18 @@
+:root{
+  --bg:#0f1115;
+  --card:#171a21;
+  --text:#ffffff;
+  --muted:#a7b0c0;
+  --radius:18px;
+}
+
+*{ box-sizing:border-box; }
+
+html, body{ height:100%; }
+
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:-apple-system, BlinkMacSystemFont, Arial, sans-serif;
+}

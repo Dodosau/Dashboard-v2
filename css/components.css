@@ -1,0 +1,27 @@
+.card{
+  background:var(--card);
+  border-radius:var(--radius);
+  padding:20px;
+}
+
+.title{
+  font-weight:800;
+  font-size:18px;
+  margin:0 0 10px 0;
+}
+
+.small{
+  color:var(--muted);
+  margin-top:8px;
+  font-size:16px;
+}
+
+.btn{
+  display:inline-block;
+  text-decoration:none;
+  color:var(--text);
+  background:rgba(167,176,192,0.15);
+  padding:10px 14px;
+  border-radius:12px;
+  font-weight:700;
+}
